@@ -1,0 +1,9 @@
+asgiref==3.11.0
+Django==6.0
+django-extension==0.1.0
+djangorestframework==3.16.1
+dnspython==2.8.0
+pymongo==4.15.5
+ruff==0.14.10
+shelve_cache==0.0.4
+sqlparse==0.5.5
