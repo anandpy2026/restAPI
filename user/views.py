@@ -22,7 +22,6 @@ class UserAPI(APIView):
                 user = User.objects.get(id=id)
             except User.DoesNotExist:
                 return Response({"error":"Not Found"},status=status.HTTP_404_NOT_FOUND)
-            
             serializer = UserSerializer(user)
             return Response(serializer.data) 
         users = User.objects.all()
