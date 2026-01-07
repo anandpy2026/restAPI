@@ -5,3 +5,4 @@ urlpatterns = [
     path('customer/', CustomerAPI.as_view(), name='uscustomerer-list'),
     path('customer/<int:id>/', CustomerAPI.as_view(), name='usecustomerr-detail'),
 ]
+

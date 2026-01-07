@@ -1,8 +1,8 @@
-from email.policy import Policy
 from django.db import models
 
-from restapi.agent.models import Agent
-from restapi.customer.models import Customer
+from agent.models import Agent
+from customer.models import Customer
+from policy.models import Policy
 
 # Create your models here.
 class CustomerPolicy(models.Model):

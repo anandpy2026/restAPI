@@ -22,4 +22,10 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path('api/', include('user.urls')),
     path('api/', include('customer.urls')),
+    path('api/', include('agent.urls')),
+    path('api/', include('customerpolicy.urls')),
+    path('api/', include('insurancecompany.urls')),
+    path('api/', include('insurancetype.urls')),
+    path('api/', include('plan.urls')),
+    path('api/', include('policy.urls')),
 ]

@@ -1,6 +1,6 @@
 from django.db import models
-from restapi.insurancecompany.models import InsuranceCompany
-from restapi.insurancetype.models import InsuranceType
+from insurancecompany.models import InsuranceCompany
+from insurancetype.models import InsuranceType
 
 # Create your models here.
 class Policy(models.Model):

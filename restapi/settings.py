@@ -40,6 +40,12 @@ INSTALLED_APPS = [
     "rest_framework",
     "user",
     "customer",
+    "agent",
+    "customerpolicy",
+    "insurancecompany",
+    "insurancetype",
+    "plan",
+    "policy",
 ]
 
 MIDDLEWARE = [
