@@ -1,24 +1,50 @@
 from django.shortcuts import render
-from rest_framework import viewsets
+from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 
 from .models import Customer
 from .serializers import CustomerSerializer
-
 # Create your views here.
-class CustomerAPI(viewsets.ModelViewSet):
-    queryset = Customer.objects.all()
-    serializer_class = CustomerSerializer
+
+class CustomerAPI(APIView):
     
-    def create(self, request, *args, **kwargs):
-        return super().create(request, *args, **kwargs)
+    def post(self,request):
+        serializer=CustomerSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data,status=status.HTTP_201_CREATED)
+        return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
     
-    def retrieve(self, request, *args, **kwargs):
-        return super().retrieve(request, *args, **kwargs)
+    def get(self,request,id=None):
+        if id:
+            try:
+                user = Customer.objects.get(id=id)
+            except Customer.DoesNotExist:
+                return Response({"error":"Not Found"},status=status.HTTP_404_NOT_FOUND)
+            serializer = CustomerSerializer(user)
+            return Response(serializer.data) 
+        users = Customer.objects.all()
+        serializer = CustomerSerializer(users,many = True)
+        return Response(serializer.data)
     
-    def update(self, request, *args, **kwargs):
-        return super().update(request, *args, **kwargs)
-    
-    def destroy(self, request, *args, **kwargs):
-        return super().destroy(request, *args, **kwargs)
+    def put(self, request, id):
+        try:
+            user = Customer.objects.get(id=id)
+        except Customer.DoesNotExist:
+            return Response({"error": "Not Found"}, status=status.HTTP_404_NOT_FOUND)
+        
+        serializer = CustomerSerializer(user, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, id):
+        try:
+            user = Customer.objects.get(id=id)
+            user.delete() 
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        except Customer.DoesNotExist:
+            return Response({"error": "Not Found"}, status=status.HTTP_404_NOT_FOUND)
+
