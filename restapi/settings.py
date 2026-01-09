@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-8lmjlei*pp@d^f=9zvirasuh)h!#gnsoaav8ho-ai(m*6c55up
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["0.0.0.0", "127.0.0.1", "localhost"]
 
 
 # Application definition
@@ -126,6 +126,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = "static/"
+
+# Default primary key field type
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # CORS Configuration
 CORS_ALLOWED_ORIGINS = [

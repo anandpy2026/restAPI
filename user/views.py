@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework import status
 
 from .models import User
-from .serializers import UserSerializer
+from .serializers import UserSerializer, UserLoginSerializer
 # Create your views here.
 
 class UserAPI(APIView):
@@ -48,3 +48,36 @@ class UserAPI(APIView):
         except User.DoesNotExist:
             return Response({"error": "Not Found"}, status=status.HTTP_404_NOT_FOUND)
 
+
+class UserLoginAPI(APIView):
+    """API endpoint for user login"""
+    
+    def post(self, request):
+        serializer = UserLoginSerializer(data=request.data)
+        if serializer.is_valid():
+            email = serializer.validated_data['email']
+            password = serializer.validated_data['password']
+            
+            try:
+                user = User.objects.get(email=email)
+            except User.DoesNotExist:
+                return Response(
+                    {"message": "Invalid email or password"}, 
+                    status=status.HTTP_401_UNAUTHORIZED
+                )
+            
+            # Check password
+            if user.check_password(password):
+                return Response({
+                    "id": user.id,
+                    "name": user.name,
+                    "email": user.email,
+                    "message": "Login successful"
+                }, status=status.HTTP_200_OK)
+            else:
+                return Response(
+                    {"message": "Invalid email or password"}, 
+                    status=status.HTTP_401_UNAUTHORIZED
+                )
+        
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

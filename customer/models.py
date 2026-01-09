@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.hashers import make_password
 
 # Create your models here.
 class Customer(models.Model):
@@ -10,3 +11,12 @@ class Customer(models.Model):
     
     def __str__(self):
         return self.name
+    
+    def set_password(self, raw_password):
+        """Hash password before saving"""
+        self.password = make_password(raw_password)
+    
+    def check_password(self, raw_password):
+        """Check if provided password matches hashed password"""
+        from django.contrib.auth.hashers import check_password
+        return check_password(raw_password, self.password)
