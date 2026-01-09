@@ -130,6 +130,22 @@ STATIC_URL = "static/"
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# Cache Configuration for OTP storage
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'insurance-cache',
+    }
+}
+
+# Telegram Bot Configuration
+# You'll set TELEGRAM_BOT_TOKEN as an environment variable
+import os
+TELEGRAM_BOT_ID = "8430572016"
+TELEGRAM_BOT_TOKEN = "8430572016:AAHeuvrWgM5qZlBvuEqTAMTZ1cWxQAjiuBQ"
+# OR set it directly here after you get the token from BotFather
+# TELEGRAM_BOT_TOKEN = 'YOUR_BOT_TOKEN_HERE'
+
 # CORS Configuration
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
@@ -137,4 +153,5 @@ CORS_ALLOWED_ORIGINS = [
     "http://0.0.0.0:3000",
     "http://localhost:8080",
     "http://0.0.0.0:8080",
+    "http://127.0.0.1:8080",
 ]

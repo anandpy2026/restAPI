@@ -4,6 +4,7 @@ django-extensions==4.1
 djangorestframework==3.16.1
 dnspython==2.8.0
 pymongo==4.15.5
+python-telegram-bot==20.7
 ruff==0.14.10
 shelve_cache==0.0.4
 sqlparse==0.5.5
